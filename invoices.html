@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoices - My Balance Book</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="loader-content">
+            <div class="iconic-spinner-wrapper">
+                <div class="iconic-ring"></div>
+                <ion-icon name="wallet" class="iconic-logo"></ion-icon>
+            </div>
+            <div class="iconic-text">LOADING</div>
+        </div>
+    </div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <ion-icon name="wallet"></ion-icon>
+                <span>BalanceBook</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <ion-icon name="grid-outline"></ion-icon>
+                <span>Dashboard</span>
+            </a>
+            <a href="sales.html" class="nav-item">
+                <ion-icon name="cash-outline"></ion-icon>
+                <span>Sales</span>
+            </a>
+            <a href="purchase.html" class="nav-item">
+                <ion-icon name="cart-outline"></ion-icon>
+                <span>Purchase</span>
+            </a>
+            <a href="accounting.html" class="nav-item">
+                <ion-icon name="calculator-outline"></ion-icon>
+                <span>Accounting</span>
+            </a>
+            <a href="employees.html" class="nav-item">
+                <ion-icon name="people-outline"></ion-icon>
+                <span>Employees</span>
+            </a>
+            <a href="barcode.html" class="nav-item">
+                <ion-icon name="qr-code-outline"></ion-icon>
+                <span>Barcode</span>
+            </a>
+            <a href="invoices.html" class="nav-item active">
+                <ion-icon name="receipt-outline"></ion-icon>
+                <span>Invoices</span>
+            </a>
+            <a href="inventory.html" class="nav-item">
+                <ion-icon name="cube-outline"></ion-icon>
+                <span>Inventory</span>
+            </a>
+            <a href="reports.html" class="nav-item">
+                <ion-icon name="bar-chart-outline"></ion-icon>
+                <span>Reports</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item">
+                <ion-icon name="settings-outline"></ion-icon>
+                <span>Settings</span>
+            </a>
+            <a href="index.html" class="nav-item logout">
+                <ion-icon name="log-out-outline"></ion-icon>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="dashboard-header">
+            <button id="menu-toggle" class="icon-btn" style="margin-right:15px; font-size:1.5rem; display:none;">
+                <ion-icon name="menu-outline"></ion-icon>
+            </button>
+            <div class="header-search">
+                <ion-icon name="search-outline"></ion-icon>
+                <input type="text" placeholder="Search invoices...">
+            </div>
+
+            <div class="header-actions">
+                <button class="icon-btn notification-btn">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    <span class="badge"></span>
+                </button>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Jay+Suthar&background=4f46e5&color=fff" alt="Profile"
+                        class="avatar-img">
+                    <div class="user-info">
+                        <span class="name">Jay Suthar</span>
+                        <span class="role">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Widgets -->
+        <div class="dashboard-container">
+            <div class="welcome-banner">
+                <div>
+                    <h1>Invoices</h1>
+                    <p>Manage and track all customer invoices.</p>
+                </div>
+                <button class="btn btn-primary">
+                    <ion-icon name="add-circle-outline"></ion-icon> Create Invoice
+                </button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid-dashboard">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:#eef2ff; color:var(--primary);">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Invoices</h3>
+                        <p class="value">1,245</p>
+                    </div>
+                </div>
+                <!-- Chart Card -->
+                <div class="card"
+                    style="grid-column: span 1; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <h3 style="margin-bottom:10px;">Payment Status</h3>
+                    <div style="width:200px; height:200px;">
+                        <canvas id="invoiceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="card" style="margin-top:24px;">
+                <div class="card-header">
+                    <h3>Recent Invoices</h3>
+                </div>
+                <table style="width:100%; text-align:left; border-collapse:collapse;">
+                    <thead>
+                        <tr style="border-bottom:1px solid var(--border-light); color:var(--text-secondary);">
+                            <th style="padding:12px;">Invoice #</th>
+                            <th style="padding:12px;">Client</th>
+                            <th style="padding:12px;">Due Date</th>
+                            <th style="padding:12px;">Amount</th>
+                            <th style="padding:12px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid var(--border-light);">
+                            <td style="padding:12px; font-weight:600;">#INV-2024</td>
+                            <td style="padding:12px;">Acme Corp</td>
+                            <td style="padding:12px; color:var(--text-muted);">Feb 02</td>
+                            <td style="padding:12px;">₹18,000</td>
+                            <td style="padding:12px;"><span
+                                    style="background:#fffbeb; color:var(--warning); padding:4px 8px; border-radius:4px; font-size:0.85rem; font-weight:600;">Pending</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--border-light);">
+                            <td style="padding:12px; font-weight:600;">#INV-2023</td>
+                            <td style="padding:12px;">Globex Inc</td>
+                            <td style="padding:12px; color:var(--text-muted);">Jan 25</td>
+                            <td style="padding:12px;">₹22,500</td>
+                            <td style="padding:12px;"><span
+                                    style="background:#ecfdf5; color:var(--success); padding:4px 8px; border-radius:4px; font-size:0.85rem; font-weight:600;">Paid</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Invoice Chart
+        const ctx = document.getElementById('invoiceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Paid', 'Pending', 'Overdue'],
+                datasets: [{
+                    data: [300, 50, 100],
+                    backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 12, font: { family: "'Outfit', sans-serif" } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

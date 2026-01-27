@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - My Balance Book</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="loader-content">
+            <div class="iconic-spinner-wrapper">
+                <div class="iconic-ring"></div>
+                <ion-icon name="wallet" class="iconic-logo"></ion-icon>
+            </div>
+            <div class="iconic-text">LOADING</div>
+        </div>
+    </div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <ion-icon name="wallet"></ion-icon>
+                <span>BalanceBook</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <ion-icon name="grid-outline"></ion-icon>
+                <span>Dashboard</span>
+            </a>
+            <a href="sales.html" class="nav-item">
+                <ion-icon name="cash-outline"></ion-icon>
+                <span>Sales</span>
+            </a>
+            <a href="purchase.html" class="nav-item">
+                <ion-icon name="cart-outline"></ion-icon>
+                <span>Purchase</span>
+            </a>
+            <a href="accounting.html" class="nav-item">
+                <ion-icon name="calculator-outline"></ion-icon>
+                <span>Accounting</span>
+            </a>
+            <a href="employees.html" class="nav-item">
+                <ion-icon name="people-outline"></ion-icon>
+                <span>Employees</span>
+            </a>
+            <a href="barcode.html" class="nav-item">
+                <ion-icon name="qr-code-outline"></ion-icon>
+                <span>Barcode</span>
+            </a>
+            <a href="invoices.html" class="nav-item">
+                <ion-icon name="receipt-outline"></ion-icon>
+                <span>Invoices</span>
+            </a>
+            <a href="inventory.html" class="nav-item active">
+                <ion-icon name="cube-outline"></ion-icon>
+                <span>Inventory</span>
+            </a>
+            <a href="reports.html" class="nav-item">
+                <ion-icon name="bar-chart-outline"></ion-icon>
+                <span>Reports</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item">
+                <ion-icon name="settings-outline"></ion-icon>
+                <span>Settings</span>
+            </a>
+            <a href="index.html" class="nav-item logout">
+                <ion-icon name="log-out-outline"></ion-icon>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="dashboard-header">
+            <button id="menu-toggle" class="icon-btn" style="margin-right:15px; font-size:1.5rem; display:none;">
+                <ion-icon name="menu-outline"></ion-icon>
+            </button>
+            <div class="header-search">
+                <ion-icon name="search-outline"></ion-icon>
+                <input type="text" placeholder="Search products...">
+            </div>
+
+            <div class="header-actions">
+                <button class="icon-btn notification-btn">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    <span class="badge"></span>
+                </button>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Jay+Suthar&background=4f46e5&color=fff" alt="Profile"
+                        class="avatar-img">
+                    <div class="user-info">
+                        <span class="name">Jay Suthar</span>
+                        <span class="role">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Widgets -->
+        <div class="dashboard-container">
+            <div class="welcome-banner">
+                <div>
+                    <h1>Inventory</h1>
+                    <p>Track stock levels and movements.</p>
+                </div>
+                <button class="btn btn-primary" onclick="window.location.href='inventory-product-details.html'">
+                    <ion-icon name="add-outline"></ion-icon> Add Product
+                </button>
+            </div>
+
+            <!-- Inventory Tabs -->
+            <div class="tabs"
+                style="display:flex; gap:20px; margin-bottom:15px; border-bottom:1px solid var(--border-light);">
+                <button class="tab-btn active"
+                    style="padding:10px 0; border-bottom:2px solid var(--primary); color:var(--primary); font-weight:600; background:none; border-top:none; border-left:none; border-right:none;"
+                    onclick="app.switchTab('products')">Products</button>
+                <button class="tab-btn" style="padding:10px 0; color:var(--text-muted); background:none; border:none;"
+                    onclick="app.switchTab('serials')">Serial Numbers</button>
+                <button class="tab-btn" style="padding:10px 0; color:var(--text-muted); background:none; border:none;"
+                    onclick="app.switchTab('settings')">Settings</button>
+            </div>
+
+            <!-- Content Grid: Products -->
+            <div id="tab-products" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Stock Overview</h3>
+                    </div>
+                    <table style="width:100%; text-align:left; border-collapse:collapse;">
+                        <thead>
+                            <tr style="border-bottom:1px solid var(--border-light); color:var(--text-secondary);">
+                                <th style="padding:12px;">Product Name</th>
+                                <th style="padding:12px;">SKU</th>
+                                <th style="padding:12px;">Category</th>
+                                <th style="padding:12px;">Stock</th>
+                                <th style="padding:12px;">Status</th>
+                                <th style="padding:12px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- No Data initially -->
+                            <tr>
+                                <td colspan="6" style="padding:30px; text-align:center; color:var(--text-muted);">
+                                    No products found. Click "Add Product" to create one.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Content Grid: Serial Numbers -->
+            <div id="tab-serials" class="tab-content" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Serial Number Allocation</h3>
+                        <button class="btn btn-primary"
+                            onclick="window.location.href='inventory-product-details.html'">Allocate New</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table style="width:100%; border-collapse:collapse;">
+                            <thead>
+                                <tr style="background:var(--bg-main); color:var(--text-secondary);">
+                                    <th style="padding:12px; text-align:left;">Serial No</th>
+                                    <th style="padding:12px; text-align:left;">Product</th>
+                                    <th style="padding:12px; text-align:left;">Status</th>
+                                    <th style="padding:12px; text-align:left;">Assigned To</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Cleared for production use -->
+                                <tr id="no-serials-row">
+                                    <td colspan="4" style="padding:30px; text-align:center; color:var(--text-muted);">
+                                        No serial numbers allocated yet. Click "Allocate New" to create one.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Grid: Settings -->
+            <div id="tab-settings" class="tab-content" style="display:none;">
+                <div class="card" style="padding:24px;">
+                    <h3>Inventory Policy</h3>
+                    <div class="input-group" style="margin-top:20px;">
+                        <label>Default Serial Number Format</label>
+                        <select
+                            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-light); margin-top:8px;">
+                            <option>SN-XXXXXXXX (Random)</option>
+                            <option>YYYY-MM-XXXX (Date Based)</option>
+                            <option>SEQ-00001 (Sequential)</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="margin-top:20px;">
+                        <label>Low Stock Warning Level</label>
+                        <input type="number" value="10"
+                            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-light); margin-top:8px;">
+                    </div>
+                    <button class="btn btn-primary" style="margin-top:20px;">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        const ctx = document.getElementById('inventoryChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Furniture', 'Electronics', 'Stationery', 'Accessories', 'Services'],
+                datasets: [{
+                    label: 'Current Stock',
+                    data: [45, 12, 150, 80, 20],
+                    backgroundColor: '#4f46e5',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                    x: { grid: { display: false } }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

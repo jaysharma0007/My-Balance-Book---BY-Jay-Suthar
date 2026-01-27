@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Product - My Balance Book</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <!-- Iconic Loader -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="iconic-spinner-wrapper">
+                <div class="iconic-ring"></div>
+                <ion-icon name="wallet" class="iconic-logo"></ion-icon>
+            </div>
+            <div class="iconic-text">LOADING</div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <ion-icon name="wallet"></ion-icon>
+                <span>BalanceBook</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <ion-icon name="grid-outline"></ion-icon>
+                <span>Dashboard</span>
+            </a>
+            <a href="sales.html" class="nav-item">
+                <ion-icon name="cash-outline"></ion-icon>
+                <span>Sales</span>
+            </a>
+            <a href="purchase.html" class="nav-item">
+                <ion-icon name="cart-outline"></ion-icon>
+                <span>Purchase</span>
+            </a>
+            <a href="accounting.html" class="nav-item">
+                <ion-icon name="calculator-outline"></ion-icon>
+                <span>Accounting</span>
+            </a>
+            <a href="employees.html" class="nav-item">
+                <ion-icon name="people-outline"></ion-icon>
+                <span>Employees</span>
+            </a>
+            <a href="barcode.html" class="nav-item">
+                <ion-icon name="qr-code-outline"></ion-icon>
+                <span>Barcode</span>
+            </a>
+            <a href="invoices.html" class="nav-item">
+                <ion-icon name="receipt-outline"></ion-icon>
+                <span>Invoices</span>
+            </a>
+            <a href="inventory.html" class="nav-item active">
+                <ion-icon name="cube-outline"></ion-icon>
+                <span>Inventory</span>
+            </a>
+            <a href="reports.html" class="nav-item">
+                <ion-icon name="bar-chart-outline"></ion-icon>
+                <span>Reports</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item">
+                <ion-icon name="settings-outline"></ion-icon>
+                <span>Settings</span>
+            </a>
+            <a href="index.html" class="nav-item logout">
+                <ion-icon name="log-out-outline"></ion-icon>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="dashboard-header">
+            <div style="display:flex; align-items:center; width:100%; justify-content:space-between;">
+                <div style="display:flex; align-items:center;">
+                    <button id="menu-toggle" class="icon-btn"
+                        style="margin-right:15px; font-size:1.5rem; display:none;">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <span style="font-size:1.5rem; font-weight:700; color:var(--text-main);">New Product</span>
+                </div>
+
+                <!-- Mobile Actions (visible on small screens) -->
+                <!-- We'll keep the existing structure but the CSS will stack it. 
+                     Actually, let's keep the buttons inline on mobile for better UX -->
+            </div>
+
+            <div class="header-actions">
+                <div style="display:flex; gap:10px;">
+                    <button class="btn btn-secondary" onclick="window.location.href='inventory.html'">Discard</button>
+                    <button class="btn btn-primary"
+                        onclick="alert('Product Saved'); window.location.href='inventory.html'">Save</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Product Details Container -->
+        <div class="dashboard-container">
+            <div class="card" style="padding:24px;">
+                <!-- Product Name -->
+                <div style="margin-bottom:20px;">
+                    <label
+                        style="font-weight:700; color:var(--text-muted); font-size:0.85rem; text-transform:uppercase;">Product
+                        Name</label>
+                    <input type="text" placeholder="e.g. Office Chair"
+                        style="width:100%; font-size:1.5rem; font-weight:600; padding:10px 0; border:none; border-bottom:1px solid var(--border-light); outline:none;">
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs"
+                    style="display:flex; gap:25px; margin-bottom:20px; border-bottom:1px solid var(--border-light);">
+                    <button class="tab-btn active" onclick="app.switchTab('general')"
+                        style="padding:10px 0; border-bottom:2px solid var(--primary); color:var(--primary); font-weight:600; background:none; border-top:none; border-left:none; border-right:none; cursor:pointer;">General
+                        Information</button>
+                    <button class="tab-btn" onclick="app.switchTab('sales')"
+                        style="padding:10px 0; color:var(--text-muted); background:none; border:none; cursor:pointer;">Sales</button>
+                    <button class="tab-btn" onclick="app.switchTab('purchase')"
+                        style="padding:10px 0; color:var(--text-muted); background:none; border:none; cursor:pointer;">Purchase</button>
+                    <button class="tab-btn" onclick="app.switchTab('inventory')"
+                        style="padding:10px 0; color:var(--text-muted); background:none; border:none; cursor:pointer;">Inventory</button>
+                    <button class="tab-btn" onclick="app.switchTab('accounting')"
+                        style="padding:10px 0; color:var(--text-muted); background:none; border:none; cursor:pointer;">Accounting</button>
+                    <button class="tab-btn" onclick="app.switchTab('images')"
+                        style="padding:10px 0; color:var(--text-muted); background:none; border:none; cursor:pointer;">Images</button>
+                </div>
+
+                <!-- Tab Content: General -->
+                <div id="tab-general" class="tab-content">
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:30px;">
+                        <div>
+                            <div class="form-group" style="margin-bottom:15px;">
+                                <label style="display:block; font-weight:600; margin-bottom:5px;">Product Type</label>
+                                <select
+                                    style="width:100%; padding:8px; border:1px solid var(--border-light); border-radius:4px;">
+                                    <option>Storable Product</option>
+                                    <option>Consumable</option>
+                                    <option>Service</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-bottom:15px;">
+                                <label style="display:block; font-weight:600; margin-bottom:5px;">Sales Price</label>
+                                <input type="number" value="1.00"
+                                    style="width:100%; padding:8px; border:1px solid var(--border-light); border-radius:4px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom:15px;">
+                                <label style="display:block; font-weight:600; margin-bottom:5px;">Cost</label>
+                                <input type="number" value="0.00"
+                                    style="width:100%; padding:8px; border:1px solid var(--border-light); border-radius:4px;">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group" style="margin-bottom:15px;">
+                                <label style="display:block; font-weight:600; margin-bottom:5px;">Internal Reference
+                                    (SKU)</label>
+                                <input type="text" placeholder="e.g. SKU-123"
+                                    style="width:100%; padding:8px; border:1px solid var(--border-light); border-radius:4px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom:15px;">
+                                <label style="display:block; font-weight:600; margin-bottom:5px;">Barcode</label>
+                                <input type="text"
+                                    style="width:100%; padding:8px; border:1px solid var(--border-light); border-radius:4px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom:15px;">
+                                <label style="display:block; font-weight:600; margin-bottom:5px;">Product
+                                    Category</label>
+                                <select
+                                    style="width:100%; padding:8px; border:1px solid var(--border-light); border-radius:4px;">
+                                    <option>All / Saleable</option>
+                                    <option>All / Expenses</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Inventory (Tracking) -->
+                <div id="tab-inventory" class="tab-content" style="display:none;">
+                    <h4 style="border-bottom:1px solid var(--border-light); padding-bottom:10px; margin-bottom:20px;">
+                        Traceability</h4>
+                    <div style="display:grid; grid-template-columns: 150px 1fr; gap:20px; align-items:start;">
+                        <label style="font-weight:600;">Tracking?</label>
+                        <div style="display:flex; flex-direction:column; gap:10px;">
+                            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                                <input type="radio" name="tracking" value="serial" checked
+                                    style="accent-color:var(--primary);">
+                                By Unique Serial Number
+                            </label>
+                            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                                <input type="radio" name="tracking" value="lots" style="accent-color:var(--primary);">
+                                By Lots
+                            </label>
+                            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                                <input type="radio" name="tracking" value="none" style="accent-color:var(--primary);">
+                                No Tracking
+                            </label>
+                        </div>
+                    </div>
+
+                    <h4
+                        style="border-bottom:1px solid var(--border-light); padding-bottom:10px; margin-bottom:20px; margin-top:30px;">
+                        Operations</h4>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                        <div class="form-group">
+                            <label style="display:block; font-weight:600; margin-bottom:5px;">Routes</label>
+                            <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox">
+                                Buy</label>
+                            <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox">
+                                Manufacture</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholders for other tabs -->
+                <div id="tab-sales" class="tab-content" style="display:none;">
+                    <p style="color:var(--text-muted);">Sales Configuration (Warranty, POS, etc.)</p>
+                </div>
+                <div id="tab-purchase" class="tab-content" style="display:none;">
+                    <p style="color:var(--text-muted);">Purchase Vendor taxes, Control Policy</p>
+                </div>
+                <div id="tab-accounting" class="tab-content" style="display:none;">
+                    <p style="color:var(--text-muted);">Income/Expense Accounts</p>
+                </div>
+                <div id="tab-images" class="tab-content" style="display:none;">
+                    <div
+                        style="border:2px dashed var(--border-light); padding:40px; text-align:center; border-radius:8px; color:var(--text-muted);">
+                        <ion-icon name="image-outline" style="font-size:3rem; margin-bottom:10px;"></ion-icon>
+                        <p>Drag and drop images here, or click to browse</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Tab Switching Logic for this page
+        app.switchTab = (tabName) => {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active');
+                el.style.borderBottom = 'none';
+                el.style.color = 'var(--text-muted)';
+            });
+
+            // Show selected
+            document.getElementById('tab-' + tabName).style.display = 'block';
+
+            // Highlight button
+            const btn = event.target;
+            btn.classList.add('active');
+            btn.style.borderBottom = '2px solid var(--primary)';
+            btn.style.color = 'var(--primary)';
+        };
+    </script>
+</body>
+
+</html>

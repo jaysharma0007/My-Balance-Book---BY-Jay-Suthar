@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Order P00921 - My Balance Book</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <!-- Iconic Loader -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="iconic-spinner-wrapper">
+                <div class="iconic-ring"></div>
+                <ion-icon name="wallet" class="iconic-logo"></ion-icon>
+            </div>
+            <div class="iconic-text">LOADING</div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <ion-icon name="wallet"></ion-icon>
+                <span>BalanceBook</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <ion-icon name="grid-outline"></ion-icon>
+                <span>Dashboard</span>
+            </a>
+            <a href="sales.html" class="nav-item">
+                <ion-icon name="cash-outline"></ion-icon>
+                <span>Sales</span>
+            </a>
+            <a href="purchase.html" class="nav-item active">
+                <ion-icon name="cart-outline"></ion-icon>
+                <span>Purchase</span>
+            </a>
+            <a href="accounting.html" class="nav-item">
+                <ion-icon name="calculator-outline"></ion-icon>
+                <span>Accounting</span>
+            </a>
+            <a href="employees.html" class="nav-item">
+                <ion-icon name="people-outline"></ion-icon>
+                <span>Employees</span>
+            </a>
+            <a href="barcode.html" class="nav-item">
+                <ion-icon name="qr-code-outline"></ion-icon>
+                <span>Barcode</span>
+            </a>
+            <a href="invoices.html" class="nav-item">
+                <ion-icon name="receipt-outline"></ion-icon>
+                <span>Invoices</span>
+            </a>
+            <a href="inventory.html" class="nav-item">
+                <ion-icon name="cube-outline"></ion-icon>
+                <span>Inventory</span>
+            </a>
+            <a href="reports.html" class="nav-item">
+                <ion-icon name="bar-chart-outline"></ion-icon>
+                <span>Reports</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item">
+                <ion-icon name="settings-outline"></ion-icon>
+                <span>Settings</span>
+            </a>
+            <a href="index.html" class="nav-item logout">
+                <ion-icon name="log-out-outline"></ion-icon>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="dashboard-header">
+            <button id="menu-toggle" class="icon-btn" style="margin-right:15px; font-size:1.5rem; display:none;">
+                <ion-icon name="menu-outline"></ion-icon>
+            </button>
+            <div class="header-search">
+                <span style="font-size:1.5rem; font-weight:700; color:var(--text-main);">New RFQ</span>
+                <span class="badge"
+                    style="background:#eef2ff; color:var(--primary); padding:4px 12px; border-radius:12px; font-size:0.85rem; margin-left:10px;">Draft</span>
+            </div>
+
+            <div class="header-actions" style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <div class="status-step done">RFQ</div>
+                    <div class="status-step done">RFQ Sent</div>
+                    <div class="status-step active" id="status-po">Purchase Order</div>
+                    <div class="status-step" id="status-received">Received</div>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button class="btn btn-secondary" onclick="window.history.back()">Back</button>
+                    <button class="btn btn-primary" id="receive-btn" onclick="app.receiveOrder('P00921')">Confirm
+                        Receipt</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Order Detail Container -->
+        <div class="dashboard-container">
+
+            <!-- Order Header Info -->
+            <div class="card" style="margin-bottom:20px; padding:24px;">
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:24px;">
+                    <div class="input-group">
+                        <label
+                            style="display:block; font-size:0.85rem; color:var(--text-muted); margin-bottom:4px;">Vendor</label>
+                        <select
+                            style="width:100%; padding:8px; border:1px solid var(--border-light); border-radius:4px; font-weight:600;">
+                            <option value="">Select Vendor...</option>
+                            <option value="azure">Azure Interior</option>
+                            <option value="gemini">Gemini Furniture</option>
+                            <option value="deco">Deco Addict</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h4 style="color:var(--text-muted); margin-bottom:4px; font-size:0.9rem;">Order Deadline</h4>
+                        <p>28-Jan-2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs"
+                style="display:flex; gap:20px; margin-bottom:15px; border-bottom:1px solid var(--border-light);">
+                <button class="tab-btn active"
+                    style="padding:10px 0; border-bottom:2px solid var(--primary); color:var(--primary); font-weight:600; background:none; border-top:none; border-left:none; border-right:none;">Products</button>
+                <button class="tab-btn"
+                    style="padding:10px 0; color:var(--text-muted); background:none; border:none;">Additional
+                    Settings</button>
+            </div>
+
+            <!-- Detailed Table -->
+            <div class="card table-responsive">
+                <table class="order-table" style="width:100%; border-collapse:collapse;">
+                    <thead>
+                        <tr style="background:var(--bg-main); color:var(--text-secondary); text-align:left;">
+                            <th style="padding:12px;">Product</th>
+                            <th style="padding:12px;">Description</th>
+                            <th style="padding:12px; text-align:center;">Qty</th>
+                            <th style="padding:12px; text-align:center;">Received</th>
+                            <th style="padding:12px; text-align:right;">Unit Price</th>
+                            <th style="padding:12px; text-align:right;">Subtotal</th>
+                            <th style="padding:12px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="po-lines" style="border-top:1px solid var(--border-light);">
+                        <tr>
+                            <td style="padding:16px; vertical-align:top;">
+                                <input type="text" placeholder="Type Product/SKU..." oninput="app.handleSkuInput(this)"
+                                    style="border:1px solid #eee; padding:5px; width:100%;">
+                            </td>
+                            <td class="col-desc"
+                                style="padding:16px; color:var(--text-muted); font-size:0.9rem; vertical-align:top;">
+                                <input type="text" placeholder="Description"
+                                    style="border:1px solid #eee; padding:5px; width:100%;">
+                            </td>
+                            <td style="padding:16px; text-align:center; vertical-align:top;">1.000</td>
+                            <td style="padding:16px; text-align:center; vertical-align:top; color:var(--text-muted);">
+                                0.000</td>
+                            <td class="col-price" style="padding:16px; text-align:right; vertical-align:top;">0.000</td>
+                            <td style="padding:16px; text-align:right; vertical-align:top; font-weight:600;">0.000</td>
+                            <td style="padding:16px; text-align:center; vertical-align:top;">
+                                <button class="icon-btn" onclick="this.closest('tr').remove()"><ion-icon
+                                        name="trash-outline" style="color:var(--danger);"></ion-icon></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="padding:16px; border-top:1px solid var(--border-light);">
+                    <button class="btn-text"
+                        style="color:var(--primary); font-weight:600; background:none; border:none; cursor:pointer;"
+                        onclick="app.addOrderRow('po-lines')">Add
+                        a product</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        app.receiveOrder = (orderId) => {
+            app.showLoader();
+            setTimeout(() => {
+                app.hideLoader();
+                // alert(`Purchase Order ${orderId} Received! Stock updated.`);
+
+                // Update Inventory (Simulated)
+                // localStorage.setItem('stock_LGT-023', 55); 
+
+                // Update UI - Status Bar
+                document.getElementById('status-po').classList.remove('active');
+                document.getElementById('status-po').classList.add('done');
+                document.getElementById('status-received').classList.add('active');
+
+                // Disable Button
+                const btn = document.getElementById('receive-btn');
+                if (btn) {
+                    btn.textContent = 'Received';
+                    btn.disabled = true;
+                    btn.classList.add('btn-success');
+                }
+
+                // Update Table
+                const receivedCell = document.querySelector('tbody tr td:nth-child(4)');
+                if (receivedCell) receivedCell.textContent = '50.000';
+            }, 1000);
+        };
+
+        app.addOrderRow = (tableBodyId) => {
+            const tbody = document.getElementById(tableBodyId);
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td style="padding:16px; vertical-align:top;">
+                    <input type="text" placeholder="Type Product/SKU..." oninput="app.handleSkuInput(this)" style="border:1px solid #eee; padding:5px; width:100%;">
+                </td>
+                <td class="col-desc" style="padding:16px; color:var(--text-muted); font-size:0.9rem; vertical-align:top;">
+                    <input type="text" placeholder="Description" style="border:1px solid #eee; padding:5px; width:100%;">
+                </td>
+                <td style="padding:16px; text-align:center; vertical-align:top;">1.000</td>
+                <td style="padding:16px; text-align:center; vertical-align:top; color:var(--text-muted);">0.000</td>
+                <td class="col-price" style="padding:16px; text-align:right; vertical-align:top;">0.000</td>
+                <td style="padding:16px; text-align:right; vertical-align:top; font-weight:600;">0.000</td>
+                <td style="padding:16px; text-align:center; vertical-align:top;">
+                    <button class="icon-btn" onclick="this.closest('tr').remove()"><ion-icon name="trash-outline" style="color:var(--danger);"></ion-icon></button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+        };
+    </script>
+</body>
+
+</html>
