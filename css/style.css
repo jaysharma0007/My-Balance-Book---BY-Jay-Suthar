@@ -734,6 +734,21 @@ footer {
     .nav-links {
         display: none;
     }
+
+    /* Mobile Header Alignment */
+    .nav-content {
+        padding: 0 16px;
+    }
+
+    .nav-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .nav-actions .btn {
+        padding: 6px 14px;
+        font-size: 0.9rem;
+    }
 }
 
 /* Loader & Spinner */

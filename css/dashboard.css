@@ -481,18 +481,13 @@ body {
         /* Force scroll on small screens */
     }
 
-    /* Stack Header Actions on Mobile */
-    .dashboard-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+    .order-table {
+        min-width: 800px;
+        /* Force scroll on small screens */
     }
 
-    .header-actions {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
+    /* Stack Header Actions on Mobile - REMOVED LEGACY CONFLICT */
+    /* .dashboard-header rules moved to line 664 */
 
     /* Tabs scroll on mobile */
     .tabs {
@@ -663,6 +658,8 @@ dialog#product-modal form {
     /* Header Adjustments - Mobile App Bar Layout */
     .dashboard-header {
         padding: 15px;
+        flex-direction: row;
+        /* Ensure row layout */
         flex-wrap: wrap;
         /* Allow wrapping */
         height: auto;
@@ -695,6 +692,15 @@ dialog#product-modal form {
         /* Let justify-content handle it */
         justify-content: flex-end;
         flex: 0 0 auto;
+    }
+
+    /* 3. Search Bar (Full Width Below) */
+    .header-search {
+        order: 3;
+        width: 100%;
+        margin-top: 10px;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 
     .user-profile .name,
