@@ -753,19 +753,19 @@ footer {
 
 /* Loader & Spinner */
 /* Loader & Spinner */
+/* --- "Liquid Prism" Ultra-Iconic Loader --- */
 #loader {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
+    inset: 0;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     z-index: 99999;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    overflow: hidden;
+    animation: magnetic-backdrop 4s ease-in-out infinite;
 }
 
 #loader.fade-out {
@@ -773,95 +773,148 @@ footer {
     visibility: hidden;
 }
 
-/* Iconic Spinner Loader (Android 16 Style) */
 .loader-content {
+    position: relative;
+    width: 200px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    z-index: 2;
+    perspective: 1000px;
 }
 
-/* --- Cinematic Glass Orbital Loader --- */
-.iconic-spinner-wrapper {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    will-change: transform;
-}
-
-/* Primary Orbital Ring */
-.iconic-ring {
+/* Tri-Axial Sculptural Rings */
+.prism-rings {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.prism-ring {
+    position: absolute;
     border-radius: 50%;
     border: 2px solid transparent;
-    border-top: 2px solid var(--primary);
-    border-bottom: 2px solid var(--primary);
-    animation: orbital-spin 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    will-change: transform;
 }
 
-/* Inner Glow Orbital */
-.iconic-ring::before {
-    content: '';
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    border-radius: 50%;
-    border: 1px solid transparent;
-    border-left: 1px solid var(--secondary);
-    border-right: 1px solid var(--secondary);
-    opacity: 0.6;
-    animation: orbital-spin 3s linear infinite reverse;
+.prism-ring.outer {
+    width: 140px;
+    height: 140px;
+    border-top: 3px solid var(--primary);
+    border-bottom: 3px solid var(--primary);
+    animation: rotate-prism-x 3s linear infinite;
 }
 
-/* Glass Aura Pulse */
-.iconic-ring::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(var(--primary-rgb), 0.1) 0%, transparent 70%);
-    animation: glass-pulse 2s ease-in-out infinite;
-    z-index: -1;
+.prism-ring.middle {
+    width: 100px;
+    height: 100px;
+    border-left: 2px solid var(--secondary);
+    border-right: 2px solid var(--secondary);
+    animation: rotate-prism-y 2s linear infinite;
 }
 
-/* Central Breathing Logo (Refined) */
+.prism-ring.inner {
+    width: 60px;
+    height: 60px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+    animation: rotate-prism-z 4s linear infinite;
+}
+
+/* Liquid Shimmer Logo */
 .iconic-logo {
-    font-size: 38px;
+    font-size: 44px;
     color: var(--primary);
-    filter: drop-shadow(0 0 15px rgba(var(--primary-rgb), 0.4));
-    animation: logo-float 2.5s ease-in-out infinite;
     z-index: 10;
-    will-change: transform, filter;
+    position: relative;
+    animation: liquid-shimmer 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(var(--primary-rgb), 0.5));
 }
 
-/* Premium Animations */
-@keyframes orbital-spin {
-    0% {
-        transform: rotate(0deg) scale(1);
+.iconic-logo::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    background: radial-gradient(circle, rgba(var(--primary-rgb), 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: aura-expand 2s ease-in-out infinite;
+}
+
+/* Centered Loading Text */
+.iconic-text {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: var(--primary);
+    text-transform: uppercase;
+    animation: text-glimmer 2s ease-in-out infinite;
+}
+
+/* Ultra-Premium Keyframes */
+@keyframes rotate-prism-x {
+    from {
+        transform: rotateX(0deg) rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateX(360deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate-prism-y {
+    from {
+        transform: rotateY(0deg) rotateX(45deg);
+    }
+
+    to {
+        transform: rotateY(360deg) rotateX(45deg);
+    }
+}
+
+@keyframes rotate-prism-z {
+    from {
+        transform: rotateZ(0deg) scale(0.95);
+    }
+
+    to {
+        transform: rotateZ(-360deg) scale(1.05);
+    }
+}
+
+@keyframes liquid-shimmer {
+
+    0%,
+    100% {
+        transform: scale(1) translateY(0);
+        filter: drop-shadow(0 0 20px rgba(79, 70, 229, 0.5)) hue-rotate(0deg);
     }
 
     50% {
-        transform: rotate(180deg) scale(1.05);
-    }
-
-    100% {
-        transform: rotate(360deg) scale(1);
+        transform: scale(1.15) translateY(-5px);
+        filter: drop-shadow(0 0 40px rgba(14, 165, 233, 0.8)) hue-rotate(15deg);
     }
 }
 
-@keyframes glass-pulse {
+@keyframes magnetic-backdrop {
+
+    0%,
+    100% {
+        backdrop-filter: blur(20px) saturate(180%) brightness(1);
+    }
+
+    50% {
+        backdrop-filter: blur(25px) saturate(220%) brightness(1.05);
+    }
+}
+
+@keyframes aura-expand {
 
     0%,
     100% {
@@ -870,24 +923,22 @@ footer {
     }
 
     50% {
-        transform: scale(1.2);
-        opacity: 0.7;
+        transform: scale(1.5);
+        opacity: 0.6;
     }
 }
 
-@keyframes logo-float {
+@keyframes text-glimmer {
 
     0%,
     100% {
-        transform: translateY(0);
-        scale: 1;
-        opacity: 0.9;
+        opacity: 0.3;
+        letter-spacing: 5px;
     }
 
     50% {
-        transform: translateY(-5px);
-        scale: 1.1;
         opacity: 1;
+        letter-spacing: 8px;
     }
 }
 
@@ -950,22 +1001,32 @@ footer {
     }
 
     .nav-links {
-        display: none;
+        display: flex;
         position: absolute;
         top: 72px;
-        /* Standard header height */
         left: 0;
         width: 100%;
         background: white;
         flex-direction: column;
-        padding: 20px;
+        padding: 40px 20px;
         border-bottom: 1px solid var(--border-light);
         z-index: 1000;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+
+        /* 3D Crazy Transition */
+        transform: perspective(1000px) translateY(-100%) rotateX(-90deg);
+        transform-origin: top center;
+        opacity: 0;
+        transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s ease;
+        pointer-events: none;
+        visibility: hidden;
     }
 
     .nav-links.active {
-        display: flex;
+        transform: perspective(1000px) translateY(0) rotateX(0deg);
+        opacity: 1;
+        pointer-events: all;
+        visibility: visible;
     }
 
     .nav-actions {

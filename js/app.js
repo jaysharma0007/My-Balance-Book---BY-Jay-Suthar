@@ -58,13 +58,15 @@ const app = {
         if (loader) {
             loader.classList.remove('fade-out');
             // Inject Iconic Structure if not present
-            if (!loader.querySelector('.iconic-spinner-wrapper')) {
+            if (!loader.querySelector('.prism-rings')) {
                 loader.innerHTML = `
                     <div class="loader-content">
-                        <div class="iconic-spinner-wrapper">
-                            <div class="iconic-ring"></div>
-                            <ion-icon name="wallet" class="iconic-logo"></ion-icon>
+                        <div class="prism-rings">
+                            <div class="prism-ring outer"></div>
+                            <div class="prism-ring middle"></div>
+                            <div class="prism-ring inner"></div>
                         </div>
+                        <ion-icon name="wallet" class="iconic-logo"></ion-icon>
                         <div class="iconic-text">LOADING</div>
                     </div>
                 `;

@@ -781,14 +781,16 @@ body {
 }
 
 /* Responsive Logic & Crazy 3D Transitions */
+/* Remove global perspective as it breaks position: fixed */
 body {
-    perspective: 1500px;
     overflow-x: hidden;
+    /* perspective: 1500px; - REMOVED: Breaks fixed positioning */
 }
 
 @media (max-width: 1024px) {
     .sidebar {
-        transform: translateX(-110%) rotateY(-30deg);
+        /* perspective(1500px) added locally to the transform */
+        transform: perspective(1500px) translateX(-110%) rotateY(-30deg);
         /* 3D Perspective start */
         transform-origin: left center;
         width: var(--sidebar-width) !important;
