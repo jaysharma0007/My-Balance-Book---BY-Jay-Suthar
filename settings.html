@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - My Balance Book</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="loader-content">
+            <div class="iconic-spinner-wrapper">
+                <div class="iconic-ring"></div>
+                <ion-icon name="wallet" class="iconic-logo"></ion-icon>
+            </div>
+            <div class="iconic-text">LOADING</div>
+        </div>
+    </div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <ion-icon name="wallet"></ion-icon>
+                <span>BalanceBook</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <ion-icon name="grid-outline"></ion-icon>
+                <span>Dashboard</span>
+            </a>
+            <a href="sales.html" class="nav-item">
+                <ion-icon name="cash-outline"></ion-icon>
+                <span>Sales</span>
+            </a>
+            <a href="purchase.html" class="nav-item">
+                <ion-icon name="cart-outline"></ion-icon>
+                <span>Purchase</span>
+            </a>
+            <a href="accounting.html" class="nav-item">
+                <ion-icon name="calculator-outline"></ion-icon>
+                <span>Accounting</span>
+            </a>
+            <a href="employees.html" class="nav-item">
+                <ion-icon name="people-outline"></ion-icon>
+                <span>Employees</span>
+            </a>
+            <a href="barcode.html" class="nav-item">
+                <ion-icon name="qr-code-outline"></ion-icon>
+                <span>Barcode</span>
+            </a>
+            <a href="invoices.html" class="nav-item">
+                <ion-icon name="receipt-outline"></ion-icon>
+                <span>Invoices</span>
+            </a>
+            <a href="inventory.html" class="nav-item">
+                <ion-icon name="cube-outline"></ion-icon>
+                <span>Inventory</span>
+            </a>
+            <a href="reports.html" class="nav-item">
+                <ion-icon name="bar-chart-outline"></ion-icon>
+                <span>Reports</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="settings.html" class="nav-item active">
+                <ion-icon name="settings-outline"></ion-icon>
+                <span>Settings</span>
+            </a>
+            <a href="index.html" class="nav-item logout">
+                <ion-icon name="log-out-outline"></ion-icon>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="menu-toggle" onclick="app.toggleSidebar()">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </button>
+
+                <div class="header-search">
+                    <ion-icon name="search-outline"></ion-icon>
+                    <input type="text" placeholder="Search settings...">
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="icon-btn notification-btn">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    <span class="badge"></span>
+                </button>
+                <div class="user-profile">
+                    <div class="avatar-box">JS</div>
+                    <div class="user-info">
+                        <span class="name">Jay Suthar</span>
+                        <span class="role">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Settings Container -->
+        <div class="dashboard-container">
+            <div class="welcome-banner">
+                <div>
+                    <h1>Settings</h1>
+                    <p>Manage your account preferences and application theme.</p>
+                </div>
+            </div>
+
+            <div class="content-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px;">
+                <!-- Theme & Appearance Panel -->
+                <div class="card info-panel">
+                    <div class="card-header">
+                        <ion-icon name="color-palette-outline"></ion-icon>
+                        <h3>Appearance</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Dark Mode</h4>
+                                <p>Switch between light and dark themes</p>
+                            </div>
+                            <div class="toggle-cont glass-toggle">
+                                <input class="toggle-input" id="dark-mode-toggle" type="checkbox"
+                                    onchange="app.toggleDarkMode()">
+                                <label class="toggle-label" for="dark-mode-toggle">
+                                    <div class="cont-icon"></div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Primary Color</h4>
+                                <p>Choose your brand's main color</p>
+                            </div>
+                            <div class="color-options" style="display: flex; gap: 8px;">
+                                <div
+                                    style="width: 24px; height: 24px; border-radius: 50%; background: #4f46e5; border: 2px solid white; outline: 2px solid var(--primary); cursor: pointer;">
+                                </div>
+                                <div
+                                    style="width: 24px; height: 24px; border-radius: 50%; background: #10b981; cursor: pointer;">
+                                </div>
+                                <div
+                                    style="width: 24px; height: 24px; border-radius: 50%; background: #ef4444; cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Information Panel -->
+                <div class="card info-panel">
+                    <div class="card-header">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <h3>Profile</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-field">
+                            <label>Full Name</label>
+                            <div class="input-wrapper">
+                                <ion-icon name="person-circle-outline"></ion-icon>
+                                <input type="text" value="Jay Suthar">
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <label>Email Address</label>
+                            <div class="input-wrapper">
+                                <ion-icon name="mail-outline"></ion-icon>
+                                <input type="email" value="jaysuthar7890@gmail.com">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">Save Profile</button>
+                    </div>
+                </div>
+
+                <!-- Security Panel -->
+                <div class="card info-panel">
+                    <div class="card-header">
+                        <ion-icon name="shield-checkmark-outline"></ion-icon>
+                        <h3>Security</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Two-Factor Auth</h4>
+                                <p>Add an extra layer of security</p>
+                            </div>
+                            <button class="btn btn-secondary btn-sm">Enable</button>
+                        </div>
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Change Password</h4>
+                                <p>Update your account access</p>
+                            </div>
+                            <button class="btn btn-secondary btn-sm">Update</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business & Tax Panel -->
+                <div class="card info-panel">
+                    <div class="card-header">
+                        <ion-icon name="business-outline"></ion-icon>
+                        <h3>Business & Tax</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-field">
+                            <label>Company Display Name</label>
+                            <div class="input-wrapper">
+                                <ion-icon name="briefcase-outline"></ion-icon>
+                                <input type="text" value="JS Tech Hub">
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <label>GST Number</label>
+                            <div class="input-wrapper">
+                                <ion-icon name="receipt-outline"></ion-icon>
+                                <input type="text" placeholder="Enter GSTIN (e.g. 24AAAAA0000A1Z5)">
+                            </div>
+                        </div>
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Invoice Auto-Numbering</h4>
+                                <p>Generate sequential invoice numbers</p>
+                            </div>
+                            <button class="btn btn-secondary btn-sm">Configure</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Panel -->
+                <div class="card info-panel">
+                    <div class="card-header">
+                        <ion-icon name="notifications-outline"></ion-icon>
+                        <h3>Notifications</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Email Alerts</h4>
+                                <p>Receive reports via email</p>
+                            </div>
+                            <button class="btn btn-secondary btn-sm">Manage</button>
+                        </div>
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <h4>Browser Push</h4>
+                                <p>Real-time status updates</p>
+                            </div>
+                            <button class="btn btn-secondary btn-sm">Disable</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check current theme and set toggle state
+            const isDark = document.body.classList.contains('dark-mode');
+            const toggle = document.getElementById('dark-mode-toggle');
+            if (toggle) toggle.checked = isDark;
+        });
+    </script>
+</body>
+
+</html>

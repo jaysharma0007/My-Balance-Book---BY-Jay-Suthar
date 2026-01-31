@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase - My Balance Book</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
@@ -70,7 +70,7 @@
         </nav>
 
         <div class="sidebar-footer">
-            <a href="#" class="nav-item">
+            <a href="settings.html" class="nav-item">
                 <ion-icon name="settings-outline"></ion-icon>
                 <span>Settings</span>
             </a>
@@ -85,26 +85,32 @@
     <main class="main-content">
         <!-- Top Header -->
         <header class="dashboard-header">
-            <button id="menu-toggle" class="icon-btn">
-                <ion-icon name="menu-outline"></ion-icon>
-            </button>
-            <div class="header-search">
-                <ion-icon name="search-outline"></ion-icon>
-                <input type="text" placeholder="Search purchases...">
+            <div class="header-left">
+                <button class="menu-toggle" onclick="app.toggleSidebar()">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </button>
+                <label class="hamburger" id="menu-toggle">
+                    <input type="checkbox" id="menu-toggle-input">
+                    <svg viewBox="0 0 32 32">
+                        <path class="line line-top-bottom"
+                            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+                        </path>
+                        <path class="line" d="M7 16 27 16"></path>
+                    </svg>
+                </label>
+                <div class="header-search">
+                    <ion-icon name="search-outline"></ion-icon>
+                    <input type="text" placeholder="Search purchase orders...">
+                </div>
             </div>
 
             <div class="header-actions">
-                <button class="btn btn-primary" onclick="window.location.href='purchase-order-details.html'">
-                    <ion-icon name="add-circle-outline"></ion-icon> New
-                </button>
                 <button class="icon-btn notification-btn">
                     <ion-icon name="notifications-outline"></ion-icon>
                     <span class="badge"></span>
                 </button>
                 <div class="user-profile">
-                    <div
-                        style="width:40px; height:40px; background:#4f46e5; color:white; display:flex; align-items:center; justify-content:center; border-radius:4px; font-weight:700;">
-                        JS</div>
+                    <div class="avatar-box">JS</div>
                     <div class="user-info">
                         <span class="name">Jay Suthar</span>
                         <span class="role">Admin</span>
@@ -139,7 +145,7 @@
         </div>
     </main>
 
-    <script src="js/app.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

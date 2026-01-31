@@ -4,11 +4,14 @@ const app = {
         app.showLoader();
         app.loadTheme();
         app.setupPageTransitions(); // Intercept links
+        app.initMobileMenu(); // Add mobile menu init
+        app.initSidebar(); // Add sidebar initialization
 
-        // Navbar Scroll Effect
+        // Navbar Scroll Effect (Only for Landing Page)
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            if (header) { // Check if header exists (might not on all pages)
+            // Check if it's the landing page header (doesn't have dashboard classes)
+            if (header && !header.classList.contains('dashboard-header')) {
                 if (window.scrollY > 50) {
                     header.classList.add('scrolled');
                 } else {
@@ -175,27 +178,26 @@ const app = {
 
     loadTheme: () => {
         const storedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Default to 'light' if no theme is stored, ignoring system preference as per user request
-        if (storedTheme === 'light' || !storedTheme) {
-            document.body.classList.add('light-theme');
-            app.updateThemeIcon('sunny-outline');
+        if (storedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            // Sync toggle if on settings page
+            const toggle = document.getElementById('dark-mode-toggle');
+            if (toggle) toggle.checked = true;
         } else {
-            document.body.classList.remove('light-theme');
-            app.updateThemeIcon('moon-outline');
+            document.body.classList.remove('dark-mode');
         }
     },
 
-    toggleTheme: () => {
-        document.body.classList.toggle('light-theme');
-        const isLight = document.body.classList.contains('light-theme');
+    toggleDarkMode: () => {
+        const isDark = document.body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
 
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        app.updateThemeIcon(isLight ? 'sunny-outline' : 'moon-outline');
+        // Visual feedback or additional sync could go here
+        console.log('Theme toggled to:', isDark ? 'dark' : 'light');
     },
 
     updateThemeIcon: (iconName) => {
+        // Obsolete if using custom toggle, but kept for compatibility
         const icon = document.querySelector('#theme-toggle ion-icon');
         if (icon) icon.setAttribute('name', iconName);
     },
@@ -277,56 +279,89 @@ const app = {
         }
     },
 
-    // UI Init
+    // UI Init (Disabled collapsible sidebar as per user request to 'stop the moving')
     initUI: () => {
-        // Menu Toggle
-        const menuBtn = document.getElementById('menu-toggle');
         const sidebar = document.querySelector('.sidebar');
-
-        // Create and Inject Overlay if not exists
-        let overlay = document.querySelector('.sidebar-overlay');
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.className = 'sidebar-overlay';
-            document.body.appendChild(overlay);
+        if (sidebar) {
+            // Ensure sidebar is in its default expanded state
+            sidebar.classList.remove('collapsed');
+            sidebar.classList.remove('open');
+            localStorage.setItem('sidebar-collapsed', 'false');
         }
 
-        if (menuBtn && sidebar) {
-            const toggleMenu = () => {
-                sidebar.classList.toggle('open');
-                overlay.classList.toggle('active');
-            };
-
-            menuBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent immediate close
-                toggleMenu();
+        // Link User Profile to Settings
+        const userProfile = document.querySelector('.user-profile');
+        if (userProfile) {
+            userProfile.addEventListener('click', () => {
+                app.showLoader();
+                setTimeout(() => {
+                    window.location.href = 'settings.html';
+                }, 500);
             });
+        }
+    },
 
-            // Close when clicking overlay
-            overlay.addEventListener('click', () => {
-                sidebar.classList.remove('open');
-                overlay.classList.remove('active');
-            });
+    // Mobile Menu Toggle (Index Page)
+    initMobileMenu: () => {
+        const navToggle = document.getElementById('nav-toggle-input');
+        const navLinks = document.querySelector('.nav-links');
+        const contentWrapper = document.getElementById('content-wrapper');
 
-            // Close sidebar when clicking outside on mobile (Legacy check, overlay handles mostly)
-            document.addEventListener('click', (e) => {
-                if (window.innerWidth <= 1024 &&
-                    !sidebar.contains(e.target) &&
-                    !menuBtn.contains(e.target) &&
-                    sidebar.classList.contains('open')) {
-                    sidebar.classList.remove('open');
-                    overlay.classList.remove('active');
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('change', () => {
+                navLinks.classList.toggle('active', navToggle.checked);
+                if (contentWrapper) {
+                    contentWrapper.classList.toggle('pushed-back', navToggle.checked);
                 }
             });
+
+            // Close menu on link click
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navToggle.checked = false;
+                    navLinks.classList.remove('active');
+                    if (contentWrapper) contentWrapper.classList.remove('pushed-back');
+                });
+            });
+        }
+    },
+
+    // Sidebar Logic
+    toggleSidebar: () => {
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const mainContent = document.querySelector('.main-content');
+        if (sidebar && overlay) {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            if (mainContent) mainContent.classList.toggle('pushed-back');
+        }
+    },
+
+    initSidebar: () => {
+        // Create overlay if it doesn't exist
+        if (!document.querySelector('.sidebar-overlay')) {
+            const overlay = document.createElement('div');
+            overlay.className = 'sidebar-overlay';
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', () => {
+                app.toggleSidebar();
+            });
         }
 
-        // Force Modal Close (Fix for Auto-Open Bug)
-        const modal = document.getElementById('product-modal');
-        if (modal && modal.open) {
-            modal.close();
-        }
+        // Close sidebar on link click (mobile)
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-item');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const sidebar = document.querySelector('.sidebar');
+                if (window.innerWidth <= 1024 && sidebar && sidebar.classList.contains('open')) {
+                    app.toggleSidebar();
+                }
+            });
+        });
     }
 };
+
 
 document.addEventListener('DOMContentLoaded', () => {
     app.init();

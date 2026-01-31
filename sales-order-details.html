@@ -87,14 +87,25 @@
     <main class="main-content">
         <!-- Top Header -->
         <header class="dashboard-header">
-            <button id="menu-toggle" class="icon-btn">
-                <ion-icon name="menu-outline"></ion-icon>
-            </button>
-            <div class="header-search" style="display:flex; align-items:center; gap:12px;">
-                <span class="order-title" style="font-size:1.5rem; font-weight:700; color:var(--text-main);">New
-                    Quotation</span>
-                <span class="badge"
-                    style="background:#eef2ff; color:var(--primary); padding:4px 12px; border-radius:12px; font-size:0.85rem;">Draft</span>
+            <div class="header-left">
+                <button class="menu-toggle" onclick="app.toggleSidebar()">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </button>
+                <label class="hamburger" id="menu-toggle">
+                    <input type="checkbox" id="menu-toggle-input">
+                    <svg viewBox="0 0 32 32">
+                        <path class="line line-top-bottom"
+                            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+                        </path>
+                        <path class="line" d="M7 16 27 16"></path>
+                    </svg>
+                </label>
+                <div class="header-title-wrapper" style="display:flex; align-items:center; gap:12px;">
+                    <span class="order-title" style="font-size:1.5rem; font-weight:700; color:var(--text-main);">New
+                        Quotation</span>
+                    <span class="status-badge"
+                        style="background:#eef2ff; color:var(--primary); padding:4px 12px; border-radius:12px; font-size:0.85rem; font-weight:600;">Draft</span>
+                </div>
             </div>
 
             <div class="header-actions" style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
@@ -216,7 +227,7 @@
         </div>
     </main>
 
-    <script src="js/app.js"></script>
+    <script src="./js/app.js"></script>
     <script>
         app.validateOrder = (orderId) => {
             app.showLoader();

@@ -72,7 +72,7 @@
         </nav>
 
         <div class="sidebar-footer">
-            <a href="#" class="nav-item">
+            <a href="settings.html" class="nav-item">
                 <ion-icon name="settings-outline"></ion-icon>
                 <span>Settings</span>
             </a>
@@ -87,17 +87,22 @@
     <main class="main-content">
         <!-- Top Header -->
         <header class="dashboard-header">
-            <div style="display:flex; align-items:center; width:100%; justify-content:space-between;">
-                <div style="display:flex; align-items:center;">
-                    <button id="menu-toggle" class="icon-btn" style="margin-right:15px; font-size:1.5rem;">
-                        <ion-icon name="menu-outline"></ion-icon>
-                    </button>
+            <div class="header-left">
+                <button class="menu-toggle" onclick="app.toggleSidebar()">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </button>
+                <label class="hamburger" id="menu-toggle">
+                    <input type="checkbox" id="menu-toggle-input">
+                    <svg viewBox="0 0 32 32">
+                        <path class="line line-top-bottom"
+                            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+                        </path>
+                        <path class="line" d="M7 16 27 16"></path>
+                    </svg>
+                </label>
+                <div class="header-title-wrapper">
                     <span style="font-size:1.5rem; font-weight:700; color:var(--text-main);">New Product</span>
                 </div>
-
-                <!-- Mobile Actions (visible on small screens) -->
-                <!-- We'll keep the existing structure but the CSS will stack it. 
-                     Actually, let's keep the buttons inline on mobile for better UX -->
             </div>
 
             <div class="header-actions">
@@ -246,7 +251,7 @@
         </div>
     </main>
 
-    <script src="js/app.js"></script>
+    <script src="./js/app.js"></script>
     <script>
         // Tab Switching Logic for this page
         app.switchTab = (tabName) => {
